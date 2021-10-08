@@ -4,6 +4,7 @@ import fr.formation.entities.ResaEntity;
 import fr.formation.repository.ResaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CheckAlreadyResaExist implements Check{
@@ -19,8 +20,8 @@ public class CheckAlreadyResaExist implements Check{
     @Override
     public void execute() throws Exception {
         Iterable<ResaEntity> list = resaRepository.findByNumChambreAndHotel(resa.getNumChambre(),resa.getHotel());
-        LocalDateTime datdeb = resa.getDatedeb();
-        LocalDateTime datfin = resa.getDatefin();
+        LocalDate datdeb = resa.getDatedeb();
+        LocalDate datfin = resa.getDatefin();
         for(ResaEntity r : list){
 //            if(datdeb.isAfter(r.getDatedeb()) && datdeb.isBefore(r.getDatefin())){
 //                throw new Exception("cette chambre est reservée pour cette date de debut");
@@ -46,7 +47,7 @@ public class CheckAlreadyResaExist implements Check{
         }
     }
 
-    private Boolean isDateBetweenOrEqualToOneOfThem(LocalDateTime d, LocalDateTime dDeb, LocalDateTime dFin ){
+    private Boolean isDateBetweenOrEqualToOneOfThem(LocalDate d, LocalDate dDeb, LocalDate dFin ){
         if(d.isEqual(dDeb)){return true;}
         if(d.isEqual(dDeb)){return true;}
         if(d.isAfter(dDeb) && d.isBefore(dFin)){return true;}

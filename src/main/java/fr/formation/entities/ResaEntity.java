@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 @Data
@@ -31,10 +32,10 @@ public class ResaEntity {
 
     @Column(nullable = true)
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime datedeb;
+    private LocalDate datedeb;
     @Column(nullable = true)
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime datefin;
+    private LocalDate datefin;
     @Column(name = "num_chambre", nullable = false)
     private int numChambre;
 }

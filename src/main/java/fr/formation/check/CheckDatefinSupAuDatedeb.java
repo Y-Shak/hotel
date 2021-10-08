@@ -1,12 +1,13 @@
 package fr.formation.check;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CheckDatefinSupAuDatedeb implements Check{
-    private LocalDateTime datedeb;
-    private LocalDateTime datefin;
+    private LocalDate datedeb;
+    private LocalDate datefin;
 
-    public CheckDatefinSupAuDatedeb(LocalDateTime datedeb, LocalDateTime datefin) {
+    public CheckDatefinSupAuDatedeb(LocalDate datedeb, LocalDate datefin) {
         this.datedeb = datedeb;
         this.datefin = datefin;
     }
