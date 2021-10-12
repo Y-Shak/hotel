@@ -20,7 +20,7 @@ public class ClientAPIController {
 
     @GetMapping(path = "", produces = "application/json")
     Iterable<ClientEntity> getAllClientApi(HttpServletRequest request){
-        return clientService.getList(request.getParameter("search"));
+        return clientService.getList(request.getParameter("search"),request.getParameter("tri"));
     }
     @GetMapping(path = "/{id}", produces = "application/json")
     ClientEntity getClientByIdApi(@PathVariable(name = "id") int id){

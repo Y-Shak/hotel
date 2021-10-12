@@ -20,7 +20,7 @@ public class HotelAPIController {
 
     @GetMapping(path = "", produces = "application/json")
     Iterable<HotelEntity> getAllHotelApi(HttpServletRequest request){
-        return hotelService.getList(request.getParameter("search"));
+        return hotelService.getList(request.getParameter("search"),request.getParameter("tri"));
     }
     @GetMapping(path = "/{id}", produces = "application/json")
     HotelEntity getHotelByIdApi(@PathVariable(name = "id") int id){

@@ -14,8 +14,15 @@ import java.util.List;
 public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
-    public Iterable<HotelEntity> getList(String search ){
+    public Iterable<HotelEntity> getList(String search , String tri){
 
+        if(tri != null && tri.length() > 0 && tri.equalsIgnoreCase("Desc")){
+            System.out.println("je suis en desc ");
+            return hotelRepository.findAllByOrderByNomDesc();
+        }
+        if(tri != null && tri.length() > 0 && tri.equalsIgnoreCase("Asc")){
+            return hotelRepository.findAllByOrderByNomAsc();
+        }
         if( search == null || search.length() == 0 ){
             return hotelRepository.findAll();
         }else{

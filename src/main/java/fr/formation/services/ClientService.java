@@ -18,7 +18,14 @@ public class ClientService {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     @Autowired
     private ClientRepository clientRepository;
-    public Iterable<ClientEntity> getList(String search){
+    public Iterable<ClientEntity> getList(String search, String tri){
+        if(tri != null && tri.length() > 0 && tri.equalsIgnoreCase("Desc")){
+            System.out.println("je suis en desc ");
+            return clientRepository.findAllByOrderByNomCompletDesc();
+        }
+        if(tri != null && tri.length() > 0 && tri.equalsIgnoreCase("Asc")){
+            return clientRepository.findAllByOrderByNomCompletAsc();
+        }
         if( search == null || search.length() == 0 ){
             return clientRepository.findAll();
         }else{
