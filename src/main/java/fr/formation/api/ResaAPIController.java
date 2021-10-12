@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -24,8 +25,9 @@ public class ResaAPIController {
     ResaService resaService;
     
     @GetMapping(path = "", produces = "application/json")
-    Iterable<ResaEntity> getAllResaApi(){
-        return resaService.getList();
+    Iterable<ResaEntity> getAllResaApi(HttpServletRequest request){
+
+        return resaService.getList(  request.getParameter("client"));
     }
     @GetMapping(path = "/{id}", produces = "application/json")
     ResaEntity getResaByIdApi(@PathVariable(name = "id") int id){

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 @RestController
@@ -18,8 +19,8 @@ public class HotelAPIController {
     HotelService hotelService;
 
     @GetMapping(path = "", produces = "application/json")
-    Iterable<HotelEntity> getAllHotelApi(){
-        return hotelService.getList();
+    Iterable<HotelEntity> getAllHotelApi(HttpServletRequest request){
+        return hotelService.getList(request.getParameter("search"));
     }
     @GetMapping(path = "/{id}", produces = "application/json")
     HotelEntity getHotelByIdApi(@PathVariable(name = "id") int id){
@@ -36,6 +37,7 @@ public class HotelAPIController {
             return ResponseEntity.created(uri) // created => HTTP 201
                     .body(createHotel);
         }catch ( Exception e ){
+            e.printStackTrace();
             throw new ResponseStatusException( HttpStatus.BAD_REQUEST , e.getMessage() );
         }
     }

@@ -18,8 +18,12 @@ public class ClientService {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     @Autowired
     private ClientRepository clientRepository;
-    public Iterable<ClientEntity> getList(){
-        return clientRepository.findAll();
+    public Iterable<ClientEntity> getList(String search){
+        if( search == null || search.length() == 0 ){
+            return clientRepository.findAll();
+        }else{
+            return clientRepository.findByNomCompletContainingIgnoreCaseOrTelephoneContainingIgnoreCaseOrAdresseContainingIgnoreCase(search,search,search);
+        }
     }
     public ClientEntity find(int id){
         return clientRepository.findById(id).get();

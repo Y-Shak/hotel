@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 @RestController
@@ -18,8 +19,8 @@ public class ClientAPIController {
     ClientService clientService;
 
     @GetMapping(path = "", produces = "application/json")
-    Iterable<ClientEntity> getAllClientApi(){
-        return clientService.getList();
+    Iterable<ClientEntity> getAllClientApi(HttpServletRequest request){
+        return clientService.getList(request.getParameter("search"));
     }
     @GetMapping(path = "/{id}", produces = "application/json")
     ClientEntity getClientByIdApi(@PathVariable(name = "id") int id){
